@@ -20,7 +20,6 @@
         body { 
             font-family: 'Rajdhani', sans-serif; 
             background: var(--bg-dark);
-            /* Arka plan devre deseni simülasyonu */
             background-image: 
                 linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
                 linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
@@ -35,7 +34,6 @@
 
         .container { max-width: 900px; margin: 0 auto; position: relative; }
         
-        /* Teknoloji Parıltısı Efekti */
         .container::before {
             content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
             width: 300px; height: 300px; background: var(--neon-purple); border-radius: 50%;
@@ -55,7 +53,6 @@
 
         .subtitle { color: var(--text-muted); font-size: 1.3rem; margin-top: 5px; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* Arıza (Glitch) Animasyonu */
         @keyframes glitch {
             0% { text-shadow: 0 0 10px var(--neon-blue); }
             2% { text-shadow: 2px 0 var(--neon-purple), -2px 0 var(--neon-blue); }
@@ -64,7 +61,6 @@
             100% { text-shadow: 3px 0 var(--neon-purple), -3px 0 var(--neon-blue); }
         }
 
-        /* Siber Banner */
         #welcome-banner {
             display: none;
             background: rgba(0, 242, 255, 0.05);
@@ -92,7 +88,6 @@
 
         .domain-grid { display: grid; gap: 25px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
         
-        /* Siber Kart Tasarımı */
         .domain-card {
             background: var(--bg-panel);
             border: 1px solid var(--border-color);
@@ -104,7 +99,6 @@
             overflow: hidden;
         }
 
-        /* Köşe Detayları (Siberpunk Estetiği) */
         .domain-card::before, .domain-card::after {
             content: ''; position: absolute; width: 10px; height: 10px; background: var(--neon-blue);
         }
@@ -137,7 +131,6 @@
             font-family: 'Orbitron', sans-serif;
         }
 
-        /* Siber Buton */
         .offer-btn {
             background: transparent;
             color: var(--neon-blue);
@@ -165,7 +158,6 @@
         .offer-btn:hover { color: #000; border-color: transparent; box-shadow: 0 0 15px rgba(0, 242, 255, 0.5); }
         .offer-btn:hover::before { left: 0; }
 
-        /* SİBER POP-UP (MODAL) */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -345,13 +337,22 @@
 
     window.onload = function() {
         const host = window.location.hostname;
+        const urlParams = new URLSearchParams(window.location.search);
+        const fromDomain = urlParams.get('from'); // ?from=martipay.com yakalayıcı
+        
         const isLocal = host.includes('127.0.0.1') || host.includes('localhost');
         const isVercel = host.includes('vercel.app');
         const isMainSite = host.includes('premiumadlar.com');
         
-        if (host.includes('.') && !isLocal && !isVercel && !isMainSite) {
+        // Eğer yönlendirmeden geliniyorsa (?from= varsa)
+        if (fromDomain) {
             document.getElementById('welcome-banner').style.display = 'block';
-            document.getElementById('coming-domain').innerText = host;
+            document.getElementById('coming-domain').innerText = fromDomain.toUpperCase();
+        } 
+        // Eğer yönlendirme yoksa ama ana site dışındaki bir domainden giriliyorsa
+        else if (host.includes('.') && !isLocal && !isVercel && !isMainSite) {
+            document.getElementById('welcome-banner').style.display = 'block';
+            document.getElementById('coming-domain').innerText = host.toUpperCase();
         }
     }
 </script>
