@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satılık Alan Adı Portföyü | Sinan Deniz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --accent: #38bdf8;
+            --btn-grad: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+            --tag-bg: rgba(56, 189, 248, 0.1);
+        }
+        
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background: var(--bg); 
+            color: var(--text-main); 
+            margin: 0; 
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container { max-width: 800px; margin: 0 auto; }
+        
+        header { text-align: center; margin-bottom: 50px; }
+        h1 { font-size: 2.8rem; font-weight: 800; margin-bottom: 10px; letter-spacing: -1px; }
+        .subtitle { color: #94a3b8; font-size: 1.1rem; }
+
+        /* Dinamik Karşılama Banner'ı */
+        #welcome-banner {
+            display: none;
+            background: rgba(56, 189, 248, 0.15);
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            text-align: center;
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .domain-grid { display: grid; gap: 16px; }
+        
+        .domain-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.05);
+            padding: 20px 28px;
+            border-radius: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .domain-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.3);
+        }
+
+        .domain-info { display: flex; flex-direction: column; gap: 6px; }
+        .domain-name { font-size: 1.4rem; font-weight: 700; color: var(--text-main); }
+        
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            background: var(--tag-bg);
+            color: var(--accent);
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            width: fit-content;
+        }
+
+        .offer-btn {
+            background: var(--btn-grad);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: transform 0.2s;
+        }
+
+        .offer-btn:hover { transform: scale(1.05); }
+
+        .footer-card {
+            margin-top: 60px;
+            text-align: center;
+            padding: 40px;
+            border-top: 1px dashed rgba(148, 163, 184, 0.2);
+        }
+
+        @media (max-width: 600px) {
+            .domain-card { flex-direction: column; text-align: center; gap: 15px; }
+            h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Alan Adı Portföyü</h1>
+        <p class="subtitle">Sinan Deniz tarafından sunulan premium dijital varlıklar</p>
+    </header>
+
+    <div id="welcome-banner">
+        <span id="coming-domain"></span> alan adı şu an satılıktır!
+    </div>
+
+    <div class="domain-grid">
+        <div class="domain-card">
+            <div class="domain-info">
+                <span class="badge">Finans / Ödeme</span>
+                <span class="domain-name">martipay.com 💰</span>
+            </div>
+            <a href="mailto:me@sinandeniz.com?subject=martipay.com Teklifi" class="offer-btn">Teklif Ver</a>
+        </div>
+
+        <div class="domain-card">
+            <div class="domain-info">
+                <span class="badge">Dijital Cüzdan</span>
+                <span class="domain-name">sanalcash.com 💳</span>
+            </div>
+            <a href="mailto:me@sinandeniz.com?subject=sanalcash.com Teklifi" class="offer-btn">Teklif Ver</a>
+        </div>
+
+        <div class="domain-card">
+            <div class="domain-info">
+                <span class="badge">Bulut Bilişim</span>
+                <span class="domain-name">bilisim.cloud ☁️</span>
+            </div>
+            <a href="mailto:me@sinandeniz.com?subject=bilisim.cloud Teklifi" class="offer-btn">Teklif Ver</a>
+        </div>
+
+        <div class="domain-card">
+            <div class="domain-info">
+                <span class="badge">Smart Home / IoT</span>
+                <span class="domain-name">akillievlerim.com 🏠</span>
+            </div>
+            <a href="mailto:me@sinandeniz.com?subject=akillievlerim.com Teklifi" class="offer-btn">Teklif Ver</a>
+        </div>
+
+        <div class="domain-card">
+            <div class="domain-info">
+                <span class="badge">E-Ticaret</span>
+                <span class="domain-name">hepuygunum.com 🛒</span>
+            </div>
+            <a href="mailto:me@sinandeniz.com?subject=hepuygunum.com Teklifi" class="offer-btn">Teklif Ver</a>
+        </div>
+
+        <div class="domain-card">
+            <div class="domain-info">
+                <span class="badge">İndirim / E-Ticaret</span>
+                <span class="domain-name">hepucuzum.com 🏷️</span>
+            </div>
+            <a href="mailto:me@sinandeniz.com?subject=hepucuzum.com Teklifi" class="offer-btn">Teklif Ver</a>
+        </div>
+    </div>
+
+    <div class="footer-card">
+        <h3>Güvenli Transfer</h3>
+        <p style="color: #94a3b8;">Tüm işlemler Escrow üzerinden veya profesyonel platformlar aracılığıyla yapılır.</p>
+        <p>İletişim: <strong>me@sinandeniz.com</strong></p>
+        <p style="font-size: 0.8rem; margin-top: 20px; opacity: 0.4;">© 2026 Sinan Deniz. Tüm Hakları Saklıdır.</p>
+    </div>
+</div>
+
+<script>
+    // Dinamik karşılama betiği
+    window.onload = function() {
+        const host = window.location.hostname;
+        // Eğer kullanıcı bir domain üzerinden geldiyse banner'ı göster
+        if (host.includes('.') && !host.includes('vercel.app')) {
+            document.getElementById('welcome-banner').style.display = 'block';
+            document.getElementById('coming-domain').innerText = host;
+        }
+    }
+</script>
+
+</body>
+</html>
