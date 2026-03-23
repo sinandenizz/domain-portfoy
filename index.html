@@ -3,157 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Alan Adı Portföyü</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Dijital Varlık Portföyü | Kod Adı: PremiumAdlar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #020617;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --text-main: #f8fafc;
-            --accent: #38bdf8;
-            --btn-grad: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --bg-dark: #00020a;
+            --bg-panel: #010a1f;
+            --neon-blue: #00f2ff;
+            --neon-purple: #bc13fe;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --border-color: rgba(0, 242, 255, 0.2);
+            --cyber-grad: linear-gradient(90deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
         }
         
         body { 
-            font-family: 'Plus Jakarta Sans', sans-serif; 
-            background: var(--bg);
-            background-image: radial-gradient(circle at top right, #1e293b, transparent), radial-gradient(circle at bottom left, #0f172a, transparent);
+            font-family: 'Rajdhani', sans-serif; 
+            background: var(--bg-dark);
+            /* Arka plan devre deseni simülasyonu */
+            background-image: 
+                linear-gradient(rgba(0, 242, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 242, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
             color: var(--text-main); 
             margin: 0; 
-            padding: 60px 20px;
-            line-height: 1.6;
+            padding: 40px 20px;
+            line-height: 1.5;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .container { max-width: 800px; margin: 0 auto; }
+        .container { max-width: 900px; margin: 0 auto; position: relative; }
         
-        header { text-align: center; margin-bottom: 60px; }
-        h1 { font-size: 3.2rem; font-weight: 800; margin: 0; letter-spacing: -2px; background: linear-gradient(to bottom, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .subtitle { color: #94a3b8; font-size: 1.2rem; margin-top: 10px; }
+        /* Teknoloji Parıltısı Efekti */
+        .container::before {
+            content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+            width: 300px; height: 300px; background: var(--neon-purple); border-radius: 50%;
+            filter: blur(150px); opacity: 0.3; z-index: -1;
+        }
 
+        header { text-align: center; margin-bottom: 80px; position: relative; }
+        
+        h1 { 
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem; font-weight: 900; margin: 0; letter-spacing: -2px; 
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 0 10px var(--neon-blue), 0 0 20px var(--neon-blue), 0 0 30px var(--neon-purple);
+            animation: glitch 3s infinite;
+        }
+
+        .subtitle { color: var(--text-muted); font-size: 1.3rem; margin-top: 5px; font-weight: 500; text-transform: uppercase; letter-spacing: 2px; }
+
+        /* Arıza (Glitch) Animasyonu */
+        @keyframes glitch {
+            0% { text-shadow: 0 0 10px var(--neon-blue); }
+            2% { text-shadow: 2px 0 var(--neon-purple), -2px 0 var(--neon-blue); }
+            4% { text-shadow: 0 0 10px var(--neon-blue); }
+            98% { text-shadow: 0 0 10px var(--neon-blue); }
+            100% { text-shadow: 3px 0 var(--neon-purple), -3px 0 var(--neon-blue); }
+        }
+
+        /* Siber Banner */
         #welcome-banner {
             display: none;
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid var(--accent);
-            color: var(--accent);
+            background: rgba(0, 242, 255, 0.05);
+            border: 1px solid var(--neon-blue);
+            color: var(--neon-blue);
             text-align: center;
             padding: 15px;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
+            border-radius: 4px;
+            margin-bottom: 40px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(0, 242, 255, 0.2), inset 0 0 10px rgba(0, 242, 255, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .domain-grid { display: grid; gap: 20px; }
-        
-        .domain-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            padding: 24px 32px;
-            border-radius: 24px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        #welcome-banner::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.2), transparent);
+            animation: scan 2s infinite;
         }
+
+        @keyframes scan { to { left: 100%; } }
+
+        .domain-grid { display: grid; gap: 25px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        
+        /* Siber Kart Tasarımı */
+        .domain-card {
+            background: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 8px;
+            position: relative;
+            transition: all 0.3s ease;
+            display: flex; gap: 20px; flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Köşe Detayları (Siberpunk Estetiği) */
+        .domain-card::before, .domain-card::after {
+            content: ''; position: absolute; width: 10px; height: 10px; background: var(--neon-blue);
+        }
+        .domain-card::before { top: 0; left: 0; clip-path: polygon(0 0, 100% 0, 0 100%); }
+        .domain-card::after { bottom: 0; right: 0; clip-path: polygon(100% 0, 100% 100%, 0 100%); }
 
         .domain-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 20px rgba(188, 19, 254, 0.3);
+            transform: translateY(-5px);
         }
 
-        .domain-info { display: flex; flex-direction: column; gap: 8px; }
-        .domain-name { font-size: 1.6rem; font-weight: 700; color: #fff; }
+        .card-header { display: flex; justify-content: space-between; align-items: start; }
+        
+        .domain-name { 
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.8rem; font-weight: 700; color: #fff; 
+            text-shadow: 0 0 5px rgba(255,255,255,0.5);
+        }
         
         .badge {
-            padding: 4px 12px;
-            background: rgba(56, 189, 248, 0.15);
-            color: var(--accent);
-            border-radius: 10px;
-            font-size: 0.75rem;
-            font-weight: 800;
+            padding: 2px 8px;
+            background: rgba(188, 19, 254, 0.1);
+            color: var(--neon-purple);
+            border: 1px solid rgba(188, 19, 254, 0.3);
+            border-radius: 2px;
+            font-size: 0.7rem;
+            font-weight: 700;
             text-transform: uppercase;
-            width: fit-content;
+            font-family: 'Orbitron', sans-serif;
         }
 
+        /* Siber Buton */
         .offer-btn {
-            background: var(--btn-grad);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 14px;
-            border: none;
+            background: transparent;
+            color: var(--neon-blue);
+            padding: 12px 20px;
+            border: 2px solid var(--neon-blue);
+            border-radius: 4px;
+            font-family: 'Orbitron', sans-serif;
             font-weight: 700;
+            text-transform: uppercase;
             font-size: 0.9rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
         }
 
-        .offer-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37, 99, 235, 0.5); }
+        .offer-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: var(--cyber-grad);
+            transition: all 0.3s ease;
+            z-index: -1;
+        }
 
-        /* Modal Tasarımı */
+        .offer-btn:hover { color: #000; border-color: transparent; box-shadow: 0 0 15px rgba(0, 242, 255, 0.5); }
+        .offer-btn:hover::before { left: 0; }
+
+        /* SİBER POP-UP (MODAL) */
         .modal-overlay {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.85);
             display: none;
             justify-content: center;
             align-items: center;
             z-index: 1000;
+            backdrop-filter: blur(5px);
         }
 
         .modal {
-            background: #1e293b;
-            border: 1px solid var(--glass-border);
+            background: var(--bg-panel);
+            border: 2px solid var(--neon-purple);
             padding: 40px;
-            border-radius: 30px;
-            max-width: 400px;
+            border-radius: 4px;
+            max-width: 450px;
             width: 90%;
             text-align: center;
             position: relative;
-            animation: modalFade 0.3s ease-out;
+            box-shadow: 0 0 30px rgba(188, 19, 254, 0.4);
+            animation: modalSlide 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        @keyframes modalFade { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        @keyframes modalSlide { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
-        .modal h2 { margin-top: 0; color: var(--accent); }
-        .modal p { color: #94a3b8; margin-bottom: 25px; }
+        .modal h2 { 
+            font-family: 'Orbitron', sans-serif;
+            margin-top: 0; color: #fff; font-size: 2rem;
+            text-shadow: 0 0 10px var(--neon-purple);
+        }
+        .modal p { color: var(--text-muted); margin-bottom: 30px; font-size: 1.1rem; }
         
         .mail-box {
-            background: #0f172a;
+            background: rgba(0, 0, 0, 0.5);
             padding: 15px;
-            border-radius: 15px;
+            border-radius: 4px;
             font-weight: 700;
-            margin-bottom: 20px;
-            border: 1px solid var(--glass-border);
-            color: #fff;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            margin-bottom: 25px;
+            border: 1px solid var(--border-color);
+            color: var(--neon-blue);
+            display: flex; justify-content: space-between; align-items: center;
+            font-family: 'Orbitron', sans-serif;
         }
 
-        .copy-btn { background: none; border: none; color: var(--accent); cursor: pointer; font-size: 0.8rem; text-decoration: underline; }
+        .copy-btn { 
+            background: transparent; border: 1px solid var(--neon-blue); color: var(--neon-blue); 
+            cursor: pointer; font-size: 0.7rem; text-transform: uppercase; padding: 5px 10px;
+            font-family: 'Orbitron', sans-serif;
+        }
+        .copy-btn:hover { background: rgba(0, 242, 255, 0.1); }
 
         .close-btn {
-            background: #334155;
-            color: white;
-            border: none;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
             padding: 10px 20px;
-            border-radius: 10px;
+            border-radius: 4px;
             cursor: pointer;
             width: 100%;
             font-weight: 600;
+            text-transform: uppercase;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 1px;
         }
+        .close-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
 
-        .footer-card { margin-top: 80px; text-align: center; opacity: 0.5; font-size: 0.9rem; border-top: 1px solid var(--glass-border); padding-top: 40px; }
+        .footer-card { margin-top: 100px; text-align: center; opacity: 0.3; font-size: 0.8rem; font-family: 'Orbitron', sans-serif; letter-spacing: 1px; border-top: 1px solid var(--border-color); padding-top: 30px; }
 
         @media (max-width: 600px) {
-            .domain-card { flex-direction: column; text-align: center; gap: 20px; }
-            h1 { font-size: 2.4rem; }
+            h1 { font-size: 2.2rem; }
+            .domain-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -162,77 +246,78 @@
 <div class="container">
     <header>
         <h1>Premium Adlar</h1>
-        <p class="subtitle">Dijital dünyadaki prestijli kimliğinizi seçin</p>
+        <p class="subtitle">Veri Tabanı: Yüksek Değerli Dijital Kimlikler</p>
     </header>
 
     <div id="welcome-banner">
-        <span id="coming-domain"></span> alan adı şu an satılıktır!
+        UYARI: <span id="coming-domain"></span> VERİ KAYDI AKTİF. SATIŞ SÜRECİ BAŞLADI.
     </div>
 
     <div class="domain-grid">
         <div class="domain-card">
-            <div class="domain-info">
-                <span class="badge">Finans / Ödeme</span>
-                <span class="domain-name">martipay.com 💰</span>
+            <div class="card-header">
+                <span class="badge">Sınıf: Finans/Ödeme</span>
             </div>
-            <button class="offer-btn" onclick="openModal('martipay.com')">Teklif Ver</button>
+            <div class="domain-name">martipay.com</div>
+            <button class="offer-btn" onclick="openModal('martipay.com')">İletişime Geç</button>
         </div>
 
         <div class="domain-card">
-            <div class="domain-info">
-                <span class="badge">Dijital Cüzdan</span>
-                <span class="domain-name">sanalcash.com 💳</span>
+            <div class="card-header">
+                <span class="badge">Sınıf: Dijital Cüzdan</span>
             </div>
-            <button class="offer-btn" onclick="openModal('sanalcash.com')">Teklif Ver</button>
+            <div class="domain-name">sanalcash.com</div>
+            <button class="offer-btn" onclick="openModal('sanalcash.com')">İletişime Geç</button>
         </div>
 
         <div class="domain-card">
-            <div class="domain-info">
-                <span class="badge">Bulut Bilişim</span>
-                <span class="domain-name">bilisim.cloud ☁️</span>
+            <div class="card-header">
+                <span class="badge">Sınıf: Bulut Bilişim</span>
             </div>
-            <button class="offer-btn" onclick="openModal('bilisim.cloud')">Teklif Ver</button>
+            <div class="domain-name">bilisim.cloud</div>
+            <button class="offer-btn" onclick="openModal('bilisim.cloud')">İletişime Geç</button>
         </div>
 
         <div class="domain-card">
-            <div class="domain-info">
-                <span class="badge">Smart Home</span>
-                <span class="domain-name">akillievlerim.com 🏠</span>
+            <div class="card-header">
+                <span class="badge">Sınıf: IoT/Smart Home</span>
             </div>
-            <button class="offer-btn" onclick="openModal('akillievlerim.com')">Teklif Ver</button>
+            <div class="domain-name">akillievlerim.com</div>
+            <button class="offer-btn" onclick="openModal('akillievlerim.com')">İletişime Geç</button>
         </div>
 
         <div class="domain-card">
-            <div class="domain-info">
-                <span class="badge">E-Ticaret</span>
-                <span class="domain-name">hepuygunum.com 🛒</span>
+            <div class="card-header">
+                <span class="badge">Sınıf: E-Ticaret</span>
             </div>
-            <button class="offer-btn" onclick="openModal('hepuygunum.com')">Teklif Ver</button>
+            <div class="domain-name">hepuygunum.com</div>
+            <button class="offer-btn" onclick="openModal('hepuygunum.com')">İletişime Geç</button>
         </div>
 
         <div class="domain-card">
-            <div class="domain-info">
-                <span class="badge">İndirim / Fırsat</span>
-                <span class="domain-name">hepucuzum.com 🏷️</span>
+            <div class="card-header">
+                <span class="badge">Sınıf: İndirim/Fırsat</span>
             </div>
-            <button class="offer-btn" onclick="openModal('hepucuzum.com')">Teklif Ver</button>
+            <div class="domain-name">hepucuzum.com</div>
+            <button class="offer-btn" onclick="openModal('hepucuzum.com')">İletişime Geç</button>
         </div>
     </div>
 
     <div class="footer-card">
-        <p>© 2026 Tüm Hakları Saklıdır.</p>
+        <p>© 2026 TÜM HAKLARI SAKLIDIR.</p>
+        <p>VERİ İLETİMİ ŞİFRELENMİŞTİR.</p>
     </div>
 </div>
 
 <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
         <h2 id="modalDomain">domain.com</h2>
-        <p>Bu alan adı için teklifinizi aşağıdaki adrese iletebilirsiniz:</p>
+        <p>Bu veri kaydı için teklifinizi aşağıdaki güvenli adrese iletin:</p>
         <div class="mail-box">
             <span id="mailAddr">info@premiumadlar.com</span>
             <button class="copy-btn" onclick="copyMail()">Kopyala</button>
         </div>
-        <button class="close-btn" onclick="closeModal()">Kapat</button>
+        <button class="close-btn" onclick="closeModal()">Kapat Pencereyi</button>
     </div>
 </div>
 
@@ -249,10 +334,9 @@
     function copyMail() {
         const mail = document.getElementById('mailAddr').innerText;
         navigator.clipboard.writeText(mail);
-        alert('E-posta adresi kopyalandı!');
+        alert('E-posta adresi kopyalandı! (Şifreli iletim hazır)');
     }
 
-    // Modal dışına tıklandığında kapatma
     window.onclick = function(event) {
         if (event.target == document.getElementById('modalOverlay')) {
             closeModal();
