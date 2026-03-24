@@ -16,7 +16,6 @@
             --border-color: rgba(0, 242, 255, 0.2);
             --accent: var(--neon-blue);
             --matrix-color: #00f2ff;
-            transition: --accent 1s, --matrix-color 1s; /* Renk geçişlerini yumuşat */
         }
 
         /* Otomatik Tema Renkleri */
@@ -32,10 +31,8 @@
             padding: 20px;
             min-height: 100vh;
             overflow-x: hidden;
-            transition: background 1s;
         }
 
-        /* Matrix Arka Planı */
         #matrix-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1; opacity: 0.15;
@@ -43,7 +40,6 @@
 
         .container { max-width: 900px; margin: 0 auto; position: relative; }
 
-        /* İstatistik Paneli */
         .stats-panel {
             display: flex; justify-content: space-around;
             background: rgba(0, 242, 255, 0.05);
@@ -51,7 +47,6 @@
             padding: 15px; border-radius: 8px; margin-bottom: 40px;
             font-family: 'Orbitron', sans-serif; font-size: 0.75rem;
             text-transform: uppercase; letter-spacing: 1px;
-            transition: border-color 1s, background 1s;
         }
         .stat-item span { color: var(--accent); font-weight: 900; transition: color 1s; }
 
@@ -70,7 +65,7 @@
             text-align: center; padding: 12px; border-radius: 4px; margin-bottom: 30px;
             font-family: 'Orbitron', sans-serif; font-weight: 700;
             box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
-            transition: border-color 1s, color 1s, box-shadow 1s;
+            transition: all 1s;
         }
 
         .domain-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
@@ -94,7 +89,6 @@
         }
         .offer-btn:hover { background: var(--accent); color: #000; }
 
-        /* Pop-up */
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.9); display: none; justify-content: center; align-items: center; z-index: 1000;
@@ -111,16 +105,16 @@
             display: flex; justify-content: space-between; align-items: center; font-family: 'Orbitron', sans-serif;
             transition: color 1s, border-color 1s;
         }
-        .copy-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 5px 10px; cursor: pointer; font-size: 0.7rem; font-family: 'Orbitron', sans-serif; transition: color 1s, border-color 1s; }
+        .copy-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 5px 10px; cursor: pointer; font-size: 0.7rem; font-family: 'Orbitron', sans-serif; }
         .copy-btn.copied { background: var(--accent); color: #000; }
 
         @keyframes glitch { 0%, 100% { text-shadow: 0 0 10px var(--accent); } 50% { text-shadow: 2px 0 #bc13fe, -2px 0 var(--accent); } }
         
-        .footer-card { margin-top: 60px; text-align: center; opacity: 0.4; font-size: 0.7rem; font-family: 'Orbitron', sans-serif; }
-        
-        /* Güvenli Satış Vurgusu */
-        .secure-note { font-size: 0.85rem; color: var(--text-muted); margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 15px; }
-        .secure-note span { color: #fff; font-weight: 700; text-shadow: 0 0 5px rgba(255,255,255,0.5); }
+        /* FOOTER GÜNCELLEMESİ */
+        .footer-card { margin-top: 60px; text-align: center; border-top: 1px solid var(--border-color); padding-top: 30px; }
+        .footer-secure { font-size: 0.8rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 20px; line-height: 1.6; }
+        .footer-secure span { color: var(--accent); font-weight: 700; transition: color 1s; }
+        .footer-copy { opacity: 0.4; font-size: 0.7rem; font-family: 'Orbitron', sans-serif; letter-spacing: 1px; }
     </style>
 </head>
 <body>
@@ -172,7 +166,10 @@
     </div>
 
     <div class="footer-card">
-        <p>© 2026 SİBER PORTFÖY. ŞİFRELİ VERİ İLETİMİ.</p>
+        <p class="footer-secure">
+            ⚠️ <span>GÜVENLİK PROTOKOLÜ:</span> Tüm alan adı transferleri ve ödeme işlemleri, alıcı ve satıcı güvenliği için uluslararası akredite <span>SEDODOMAIN (Sedo.com)</span> veya <span>DAN.COM</span> güvencesiyle, "Escrow" (Emanet) sistemi üzerinden gerçekleştirilir.
+        </p>
+        <p class="footer-copy">© 2026 SİBER PORTFÖY. ŞİFRELİ VERİ İLETİMİ.</p>
     </div>
 </div>
 
@@ -180,95 +177,66 @@
     <div class="modal">
         <h2 id="modalDomain" style="font-family: 'Orbitron'; color: #fff; text-transform: uppercase;">domain.com</h2>
         <p style="color: var(--text-muted); margin-bottom: 5px;">Teklifinizi güvenli kanaldan iletin:</p>
-        
         <div class="mail-box">
             <span id="mailAddr">info@premiumadlar.com</span>
             <button class="copy-btn" id="copyBtn" onclick="copyMail()">Kopyala</button>
         </div>
-        
-        <p class="secure-note">
-            ⚠️ GÜVENLİK PROTOKOLÜ: Tüm alan adı transferleri ve ödeme işlemleri, alıcı ve satıcı güvenliği için uluslararası akredite <span>SEDODOMAIN (Sedo.com)</span> veya <span>DAN.COM</span> güvencesiyle, "Escrow" (Emanet) sistemi üzerinden gerçekleştirilir.
-        </        p>
-
-        <button class="offer-btn" style="width:100%; margin-top: 20px;" onclick="closeModal()">Kapat Pencereyi</button>
+        <button class="offer-btn" style="width:100%" onclick="closeModal()">Pencereyi Kapat</button>
     </div>
 </div>
 
 <script>
-    // Matrix Yağmuru
     const canvas = document.getElementById('matrix-canvas');
     const ctx = canvas.getContext('2d');
-    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%";
+    function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.onresize = resize; resize();
+    
+    const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
     const fontSize = 16;
-    let columns = canvas.width / fontSize;
-    let drops = Array(Math.floor(columns)).fill(1);
+    let drops = Array(Math.floor(canvas.width / fontSize)).fill(1);
 
-    function drawMatrix() {
+    function draw() {
         ctx.fillStyle = "rgba(0, 2, 10, 0.05)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        // Dinamik renk al
         ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--matrix-color');
         ctx.font = fontSize + "px arial";
-        for (let i = 0; i < drops.length; i++) {
+        drops.forEach((y, i) => {
             const text = letters[Math.floor(Math.random() * letters.length)];
-            ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-            if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+            ctx.fillText(text, i * fontSize, y * fontSize);
+            if (y * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
             drops[i]++;
-        }
-    }
-    setInterval(drawMatrix, 50);
-
-    // Otomatik Tema Değiştirici (5 Saniyede Bir)
-    const themes = ['blue', 'green', 'red'];
-    let currentThemeIndex = 0;
-    function autoSetTheme() {
-        document.body.className = '';
-        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-        document.body.classList.add('theme-' + themes[currentThemeIndex]);
-    }
-    // İlk temayı uygula ve döngüyü başlat
-    document.body.classList.add('theme-blue');
-    setInterval(autoSetTheme, 5000); // 5000ms = 5 Saniye
-
-    // Modal ve Kopyalama
-    function openModal(domain) {
-        document.getElementById('modalDomain').innerText = domain;
-        document.getElementById('modalOverlay').style.display = 'flex';
-        const btn = document.getElementById('copyBtn');
-        btn.innerText = "Kopyala";
-        btn.classList.remove('copied');
-    }
-
-    function closeModal() { document.getElementById('modalOverlay').style.display = 'none'; }
-
-    function copyMail() {
-        const mail = document.getElementById('mailAddr').innerText;
-        const btn = document.getElementById('copyBtn');
-        navigator.clipboard.writeText(mail).then(() => {
-            btn.innerText = "Kopyalandı!";
-            btn.classList.add('copied');
-            setTimeout(() => { btn.innerText = "Kopyala"; btn.classList.remove('copied'); }, 2000);
         });
     }
+    setInterval(draw, 50);
 
-    // Modal dışına tıklayınca kapatma
-    window.onclick = function(event) {
-        if (event.target == document.getElementById('modalOverlay')) { closeModal(); }
+    const themes = ['blue', 'green', 'red'];
+    let idx = 0;
+    setInterval(() => {
+        document.body.className = 'theme-' + themes[++idx % themes.length];
+    }, 5000);
+    document.body.className = 'theme-blue';
+
+    function openModal(d) {
+        document.getElementById('modalDomain').innerText = d;
+        document.getElementById('modalOverlay').style.display = 'flex';
     }
-
-    // Banner Kontrolü
-    window.onload = function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const fromDomain = urlParams.get('from');
-        if (fromDomain) {
+    function closeModal() { document.getElementById('modalOverlay').style.display = 'none'; }
+    function copyMail() {
+        const m = document.getElementById('mailAddr').innerText;
+        const b = document.getElementById('copyBtn');
+        navigator.clipboard.writeText(m).then(() => {
+            b.innerText = "Kopyalandı!";
+            setTimeout(() => b.innerText = "Kopyala", 2000);
+        });
+    }
+    window.onclick = (e) => { if(e.target == document.getElementById('modalOverlay')) closeModal(); }
+    window.onload = () => {
+        const p = new URLSearchParams(window.location.search).get('from');
+        if(p) {
             document.getElementById('welcome-banner').style.display = 'block';
-            document.getElementById('coming-domain').innerText = fromDomain.toUpperCase();
+            document.getElementById('coming-domain').innerText = p.toUpperCase();
         }
     }
 </script>
-
 </body>
 </html>
