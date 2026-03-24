@@ -18,7 +18,7 @@
             --matrix-color: #00f2ff;
         }
 
-        /* Otomatik Tema Renkleri */
+        /* Otomatik Tema Renkleri ve Yumuşak Geçiş */
         body.theme-blue { --accent: #00f2ff; --matrix-color: #00f2ff; }
         body.theme-green { --accent: #00ff41; --matrix-color: #00ff41; }
         body.theme-red { --accent: #ff003c; --matrix-color: #ff003c; }
@@ -31,6 +31,7 @@
             padding: 20px;
             min-height: 100vh;
             overflow-x: hidden;
+            transition: all 1.2s ease-in-out;
         }
 
         #matrix-canvas {
@@ -40,15 +41,29 @@
 
         .container { max-width: 900px; margin: 0 auto; position: relative; }
 
+        /* İstatistik Paneli - Mobil Fix */
         .stats-panel {
-            display: flex; justify-content: space-around;
+            display: flex; 
+            justify-content: space-around;
+            align-items: center;
             background: rgba(0, 242, 255, 0.05);
             border: 1px solid var(--border-color);
-            padding: 15px; border-radius: 8px; margin-bottom: 40px;
-            font-family: 'Orbitron', sans-serif; font-size: 0.75rem;
-            text-transform: uppercase; letter-spacing: 1px;
+            padding: 15px; 
+            border-radius: 8px; 
+            margin-bottom: 40px;
+            font-family: 'Orbitron', sans-serif; 
+            font-size: 0.75rem;
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            transition: border-color 1.2s ease;
         }
-        .stat-item span { color: var(--accent); font-weight: 900; transition: color 1s; }
+        
+        .stat-item {
+            white-space: nowrap;
+            padding: 0 5px;
+        }
+        
+        .stat-item span { color: var(--accent); font-weight: 900; transition: color 1.2s ease; }
 
         header { text-align: center; margin-bottom: 60px; }
         h1 { 
@@ -56,7 +71,7 @@
             margin: 0; text-transform: uppercase; color: #fff;
             text-shadow: 0 0 10px var(--accent);
             animation: glitch 3s infinite;
-            transition: text-shadow 1s;
+            transition: text-shadow 1.2s ease;
         }
 
         #welcome-banner {
@@ -65,7 +80,7 @@
             text-align: center; padding: 12px; border-radius: 4px; margin-bottom: 30px;
             font-family: 'Orbitron', sans-serif; font-weight: 700;
             box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
-            transition: all 1s;
+            transition: all 1.2s ease;
         }
 
         .domain-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
@@ -79,13 +94,13 @@
         .domain-card:hover { border-color: var(--accent); box-shadow: 0 0 20px rgba(0, 242, 255, 0.2); transform: translateY(-5px); }
 
         .domain-name { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #fff; }
-        .badge { color: var(--accent); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; font-family: 'Orbitron', sans-serif; transition: color 1s; }
+        .badge { color: var(--accent); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; font-family: 'Orbitron', sans-serif; transition: color 1.2s ease; }
 
         .offer-btn {
             background: transparent; color: var(--accent); padding: 10px;
             border: 2px solid var(--accent); border-radius: 4px;
             font-family: 'Orbitron', sans-serif; font-weight: 700; cursor: pointer;
-            transition: all 0.3s, color 1s, border-color 1s; text-transform: uppercase;
+            transition: all 0.3s, color 1.2s ease, border-color 1.2s ease; text-transform: uppercase;
         }
         .offer-btn:hover { background: var(--accent); color: #000; }
 
@@ -97,24 +112,37 @@
         .modal {
             background: var(--bg-panel); border: 2px solid var(--accent);
             padding: 30px; border-radius: 4px; max-width: 450px; width: 90%; text-align: center;
-            transition: border-color 1s;
+            transition: border-color 1.2s ease;
         }
         .mail-box {
             background: #000; padding: 15px; border-radius: 4px; margin: 20px 0;
             border: 1px solid var(--border-color); color: var(--accent);
             display: flex; justify-content: space-between; align-items: center; font-family: 'Orbitron', sans-serif;
-            transition: color 1s, border-color 1s;
+            transition: color 1.2s ease, border-color 1.2s ease;
         }
         .copy-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 5px 10px; cursor: pointer; font-size: 0.7rem; font-family: 'Orbitron', sans-serif; }
         .copy-btn.copied { background: var(--accent); color: #000; }
 
         @keyframes glitch { 0%, 100% { text-shadow: 0 0 10px var(--accent); } 50% { text-shadow: 2px 0 #bc13fe, -2px 0 var(--accent); } }
         
-        /* FOOTER GÜNCELLEMESİ */
         .footer-card { margin-top: 60px; text-align: center; border-top: 1px solid var(--border-color); padding-top: 30px; }
         .footer-secure { font-size: 0.8rem; color: var(--text-muted); max-width: 600px; margin: 0 auto 20px; line-height: 1.6; }
-        .footer-secure span { color: var(--accent); font-weight: 700; transition: color 1s; }
+        .footer-secure span { color: var(--accent); font-weight: 700; transition: color 1.2s ease; }
         .footer-copy { opacity: 0.4; font-size: 0.7rem; font-family: 'Orbitron', sans-serif; letter-spacing: 1px; }
+
+        /* MOBİL DÜZENLEMELER */
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .stats-panel { 
+                font-size: 0.6rem; 
+                padding: 10px 5px; 
+                letter-spacing: 0px;
+                justify-content: space-between;
+            }
+            .stat-item { padding: 0 2px; }
+            .domain-name { font-size: 1.2rem; }
+            .footer-secure { font-size: 0.7rem; padding: 0 10px; }
+        }
     </style>
 </head>
 <body>
@@ -209,16 +237,21 @@
     }
     setInterval(draw, 50);
 
+    // Otomatik Tema Değişimi
     const themes = ['blue', 'green', 'red'];
     let idx = 0;
     setInterval(() => {
-        document.body.className = 'theme-' + themes[++idx % themes.length];
+        idx = (idx + 1) % themes.length;
+        document.body.className = 'theme-' + themes[idx];
     }, 5000);
     document.body.className = 'theme-blue';
 
     function openModal(d) {
         document.getElementById('modalDomain').innerText = d;
         document.getElementById('modalOverlay').style.display = 'flex';
+        const btn = document.getElementById('copyBtn');
+        btn.innerText = "Kopyala";
+        btn.classList.remove('copied');
     }
     function closeModal() { document.getElementById('modalOverlay').style.display = 'none'; }
     function copyMail() {
@@ -226,7 +259,11 @@
         const b = document.getElementById('copyBtn');
         navigator.clipboard.writeText(m).then(() => {
             b.innerText = "Kopyalandı!";
-            setTimeout(() => b.innerText = "Kopyala", 2000);
+            b.classList.add('copied');
+            setTimeout(() => {
+                b.innerText = "Kopyala";
+                b.classList.remove('copied');
+            }, 2000);
         });
     }
     window.onclick = (e) => { if(e.target == document.getElementById('modalOverlay')) closeModal(); }
