@@ -201,14 +201,17 @@
             color: var(--neon-blue);
             display: flex; justify-content: space-between; align-items: center;
             font-family: 'Orbitron', sans-serif;
+            position: relative;
         }
 
         .copy-btn { 
             background: transparent; border: 1px solid var(--neon-blue); color: var(--neon-blue); 
             cursor: pointer; font-size: 0.7rem; text-transform: uppercase; padding: 5px 10px;
             font-family: 'Orbitron', sans-serif;
+            transition: all 0.2s;
         }
         .copy-btn:hover { background: rgba(0, 242, 255, 0.1); }
+        .copy-btn.copied { background: var(--neon-blue); color: #000; }
 
         .close-btn {
             background: rgba(255, 255, 255, 0.05);
@@ -264,14 +267,6 @@
 
         <div class="domain-card">
             <div class="card-header">
-                <span class="badge">Sınıf: Bulut Bilişim</span>
-            </div>
-            <div class="domain-name">bilisim.cloud</div>
-            <button class="offer-btn" onclick="openModal('bilisim.cloud')">İletişime Geç</button>
-        </div>
-
-        <div class="domain-card">
-            <div class="card-header">
                 <span class="badge">Sınıf: IoT/Smart Home</span>
             </div>
             <div class="domain-name">akillievlerim.com</div>
@@ -307,7 +302,7 @@
         <p>Bu veri kaydı için teklifinizi aşağıdaki güvenli adrese iletin:</p>
         <div class="mail-box">
             <span id="mailAddr">info@premiumadlar.com</span>
-            <button class="copy-btn" onclick="copyMail()">Kopyala</button>
+            <button class="copy-btn" id="copyBtn" onclick="copyMail()">Kopyala</button>
         </div>
         <button class="close-btn" onclick="closeModal()">Kapat Pencereyi</button>
     </div>
@@ -317,6 +312,10 @@
     function openModal(domain) {
         document.getElementById('modalDomain').innerText = domain;
         document.getElementById('modalOverlay').style.display = 'flex';
+        // Modal açıldığında kopyala butonunu resetle
+        const btn = document.getElementById('copyBtn');
+        btn.innerText = "Kopyala";
+        btn.classList.remove('copied');
     }
 
     function closeModal() {
@@ -325,8 +324,19 @@
 
     function copyMail() {
         const mail = document.getElementById('mailAddr').innerText;
-        navigator.clipboard.writeText(mail);
-        alert('E-posta adresi kopyalandı! (Şifreli iletim hazır)');
+        const btn = document.getElementById('copyBtn');
+        
+        navigator.clipboard.writeText(mail).then(() => {
+            // Alert yerine butonun metnini değiştirerek görsel geri bildirim veriyoruz
+            btn.innerText = "Kopyalandı!";
+            btn.classList.add('copied');
+            
+            // 2 saniye sonra eski haline döndür
+            setTimeout(() => {
+                btn.innerText = "Kopyala";
+                btn.classList.remove('copied');
+            }, 2000);
+        });
     }
 
     window.onclick = function(event) {
@@ -338,18 +348,16 @@
     window.onload = function() {
         const host = window.location.hostname;
         const urlParams = new URLSearchParams(window.location.search);
-        const fromDomain = urlParams.get('from'); // ?from=martipay.com yakalayıcı
+        const fromDomain = urlParams.get('from');
         
         const isLocal = host.includes('127.0.0.1') || host.includes('localhost');
         const isVercel = host.includes('vercel.app');
         const isMainSite = host.includes('premiumadlar.com');
         
-        // Eğer yönlendirmeden geliniyorsa (?from= varsa)
         if (fromDomain) {
             document.getElementById('welcome-banner').style.display = 'block';
             document.getElementById('coming-domain').innerText = fromDomain.toUpperCase();
         } 
-        // Eğer yönlendirme yoksa ama ana site dışındaki bir domainden giriliyorsa
         else if (host.includes('.') && !isLocal && !isVercel && !isMainSite) {
             document.getElementById('welcome-banner').style.display = 'block';
             document.getElementById('coming-domain').innerText = host.toUpperCase();
