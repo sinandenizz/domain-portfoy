@@ -15,11 +15,14 @@
             --text-muted: #94a3b8;
             --border-color: rgba(0, 242, 255, 0.2);
             --accent: var(--neon-blue);
+            --matrix-color: #00f2ff;
+            transition: --accent 1s, --matrix-color 1s; /* Renk geçişlerini yumuşat */
         }
 
-        /* Tema Renkleri */
-        body.theme-green { --accent: #00ff41; --neon-blue: #00ff41; --neon-purple: #003b00; }
-        body.theme-red { --accent: #ff003c; --neon-blue: #ff003c; --neon-purple: #4e0000; }
+        /* Otomatik Tema Renkleri */
+        body.theme-blue { --accent: #00f2ff; --matrix-color: #00f2ff; }
+        body.theme-green { --accent: #00ff41; --matrix-color: #00ff41; }
+        body.theme-red { --accent: #ff003c; --matrix-color: #ff003c; }
         
         body { 
             font-family: 'Rajdhani', sans-serif; 
@@ -29,6 +32,7 @@
             padding: 20px;
             min-height: 100vh;
             overflow-x: hidden;
+            transition: background 1s;
         }
 
         /* Matrix Arka Planı */
@@ -47,19 +51,9 @@
             padding: 15px; border-radius: 8px; margin-bottom: 40px;
             font-family: 'Orbitron', sans-serif; font-size: 0.75rem;
             text-transform: uppercase; letter-spacing: 1px;
+            transition: border-color 1s, background 1s;
         }
-        .stat-item span { color: var(--accent); font-weight: 900; }
-
-        /* Tema Değiştirici */
-        .theme-switcher {
-            position: fixed; top: 20px; right: 20px; display: flex; gap: 10px; z-index: 100;
-        }
-        .theme-btn {
-            width: 25px; height: 25px; border-radius: 50%; border: 2px solid #fff; cursor: pointer;
-        }
-        .btn-blue { background: #00f2ff; }
-        .btn-green { background: #00ff41; }
-        .btn-red { background: #ff003c; }
+        .stat-item span { color: var(--accent); font-weight: 900; transition: color 1s; }
 
         header { text-align: center; margin-bottom: 60px; }
         h1 { 
@@ -67,6 +61,7 @@
             margin: 0; text-transform: uppercase; color: #fff;
             text-shadow: 0 0 10px var(--accent);
             animation: glitch 3s infinite;
+            transition: text-shadow 1s;
         }
 
         #welcome-banner {
@@ -75,6 +70,7 @@
             text-align: center; padding: 12px; border-radius: 4px; margin-bottom: 30px;
             font-family: 'Orbitron', sans-serif; font-weight: 700;
             box-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
+            transition: border-color 1s, color 1s, box-shadow 1s;
         }
 
         .domain-grid { display: grid; gap: 20px; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
@@ -88,13 +84,13 @@
         .domain-card:hover { border-color: var(--accent); box-shadow: 0 0 20px rgba(0, 242, 255, 0.2); transform: translateY(-5px); }
 
         .domain-name { font-family: 'Orbitron', sans-serif; font-size: 1.5rem; color: #fff; }
-        .badge { color: var(--accent); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; font-family: 'Orbitron', sans-serif; }
+        .badge { color: var(--accent); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; font-family: 'Orbitron', sans-serif; transition: color 1s; }
 
         .offer-btn {
             background: transparent; color: var(--accent); padding: 10px;
             border: 2px solid var(--accent); border-radius: 4px;
             font-family: 'Orbitron', sans-serif; font-weight: 700; cursor: pointer;
-            transition: all 0.3s; text-transform: uppercase;
+            transition: all 0.3s, color 1s, border-color 1s; text-transform: uppercase;
         }
         .offer-btn:hover { background: var(--accent); color: #000; }
 
@@ -102,33 +98,34 @@
         .modal-overlay {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.9); display: none; justify-content: center; align-items: center; z-index: 1000;
+            backdrop-filter: blur(5px);
         }
         .modal {
             background: var(--bg-panel); border: 2px solid var(--accent);
-            padding: 30px; border-radius: 4px; max-width: 400px; width: 90%; text-align: center;
+            padding: 30px; border-radius: 4px; max-width: 450px; width: 90%; text-align: center;
+            transition: border-color 1s;
         }
         .mail-box {
             background: #000; padding: 15px; border-radius: 4px; margin: 20px 0;
             border: 1px solid var(--border-color); color: var(--accent);
             display: flex; justify-content: space-between; align-items: center; font-family: 'Orbitron', sans-serif;
+            transition: color 1s, border-color 1s;
         }
-        .copy-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 5px 10px; cursor: pointer; font-size: 0.7rem; font-family: 'Orbitron', sans-serif; }
+        .copy-btn { background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 5px 10px; cursor: pointer; font-size: 0.7rem; font-family: 'Orbitron', sans-serif; transition: color 1s, border-color 1s; }
         .copy-btn.copied { background: var(--accent); color: #000; }
 
         @keyframes glitch { 0%, 100% { text-shadow: 0 0 10px var(--accent); } 50% { text-shadow: 2px 0 #bc13fe, -2px 0 var(--accent); } }
         
         .footer-card { margin-top: 60px; text-align: center; opacity: 0.4; font-size: 0.7rem; font-family: 'Orbitron', sans-serif; }
+        
+        /* Güvenli Satış Vurgusu */
+        .secure-note { font-size: 0.85rem; color: var(--text-muted); margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 15px; }
+        .secure-note span { color: #fff; font-weight: 700; text-shadow: 0 0 5px rgba(255,255,255,0.5); }
     </style>
 </head>
 <body>
 
 <canvas id="matrix-canvas"></canvas>
-
-<div class="theme-switcher">
-    <div class="theme-btn btn-blue" onclick="setTheme('blue')"></div>
-    <div class="theme-btn btn-green" onclick="setTheme('green')"></div>
-    <div class="theme-btn btn-red" onclick="setTheme('red')"></div>
-</div>
 
 <div class="container">
     <header>
@@ -139,7 +136,7 @@
     <div class="stats-panel">
         <div class="stat-item">Varlık: <span id="asset-count">5</span></div>
         <div class="stat-item">Ağ Güvenliği: <span>Aktif</span></div>
-        <div class="stat-item">Sistem: <span>Çevrimiçi</span></div>
+        <div class="stat-item">Sistem Durumu: <span>Çevrimiçi</span></div>
     </div>
 
     <div id="welcome-banner">
@@ -181,13 +178,19 @@
 
 <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
-        <h2 id="modalDomain" style="font-family: 'Orbitron'; color: #fff;">domain.com</h2>
-        <p style="color: var(--text-muted);">Teklifinizi güvenli kanaldan iletin:</p>
+        <h2 id="modalDomain" style="font-family: 'Orbitron'; color: #fff; text-transform: uppercase;">domain.com</h2>
+        <p style="color: var(--text-muted); margin-bottom: 5px;">Teklifinizi güvenli kanaldan iletin:</p>
+        
         <div class="mail-box">
             <span id="mailAddr">info@premiumadlar.com</span>
             <button class="copy-btn" id="copyBtn" onclick="copyMail()">Kopyala</button>
         </div>
-        <button class="offer-btn" style="width:100%" onclick="closeModal()">Kapat</button>
+        
+        <p class="secure-note">
+            ⚠️ GÜVENLİK PROTOKOLÜ: Tüm alan adı transferleri ve ödeme işlemleri, alıcı ve satıcı güvenliği için uluslararası akredite <span>SEDODOMAIN (Sedo.com)</span> veya <span>DAN.COM</span> güvencesiyle, "Escrow" (Emanet) sistemi üzerinden gerçekleştirilir.
+        </        p>
+
+        <button class="offer-btn" style="width:100%; margin-top: 20px;" onclick="closeModal()">Kapat Pencereyi</button>
     </div>
 </div>
 
@@ -195,17 +198,19 @@
     // Matrix Yağmuru
     const canvas = document.getElementById('matrix-canvas');
     const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+    function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
     const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()*&^%";
     const fontSize = 16;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(1);
+    let columns = canvas.width / fontSize;
+    let drops = Array(Math.floor(columns)).fill(1);
 
     function drawMatrix() {
         ctx.fillStyle = "rgba(0, 2, 10, 0.05)";
         ctx.fillRect(0, 0, canvas.width, canvas.height);
-        ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--accent');
+        // Dinamik renk al
+        ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--matrix-color');
         ctx.font = fontSize + "px arial";
         for (let i = 0; i < drops.length; i++) {
             const text = letters[Math.floor(Math.random() * letters.length)];
@@ -216,11 +221,17 @@
     }
     setInterval(drawMatrix, 50);
 
-    // Tema Değiştirici
-    function setTheme(theme) {
+    // Otomatik Tema Değiştirici (5 Saniyede Bir)
+    const themes = ['blue', 'green', 'red'];
+    let currentThemeIndex = 0;
+    function autoSetTheme() {
         document.body.className = '';
-        if (theme !== 'blue') document.body.classList.add('theme-' + theme);
+        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
+        document.body.classList.add('theme-' + themes[currentThemeIndex]);
     }
+    // İlk temayı uygula ve döngüyü başlat
+    document.body.classList.add('theme-blue');
+    setInterval(autoSetTheme, 5000); // 5000ms = 5 Saniye
 
     // Modal ve Kopyalama
     function openModal(domain) {
@@ -243,6 +254,12 @@
         });
     }
 
+    // Modal dışına tıklayınca kapatma
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('modalOverlay')) { closeModal(); }
+    }
+
+    // Banner Kontrolü
     window.onload = function() {
         const urlParams = new URLSearchParams(window.location.search);
         const fromDomain = urlParams.get('from');
